@@ -6,14 +6,14 @@
             <x-label style="font-size: 3vh; padding-top: 10px; color: black">{{ __('City') }}</x-label><span style="font-size: 2vh; padding-top: 10px; color: black">{{ $station->city }}</span>
             <x-label style="font-size: 3vh; padding-top: 10px; color: black">{{ __('Timezone') }}</x-label><span style="font-size: 2vh; padding-top: 10px; color: black">{{ $station->timezone }}</span>
             {{-- Divider --}}
-            <div class="border-t border-gray-100 w-full mb-3"></div>
-            <x-label style="font-size: 3vh; padding-top: 10px; color: deepskyblue">{{ __('PET') }}</x-label>
-            <x-label style="font-size: 2vh; padding-top: 10px; color: deepskyblue"><span id="pet-data-span"></span> °C</x-label>
-            <x-label style="font-size: 3vh; padding-top: 20px; color: blue">{{ __('Temperature') }}</x-label>
-            <x-label style="font-size: 2vh; padding-top: 10px; color: blue">{{ $station->measurements[count($station->measurements) - 1]->th_temp}} °C</x-label>
-            <x-label style="font-size: 3vh; padding-top: 20px; color: darkblue">{{ __('Humidity') }}</x-label>
+            <div class="border-t border-gray-100 w-full mb-6"></div>
+            <x-label class="mt-3 px-2 py-2 text-white text-4xl font-bold rounded-lg flex items-center justify-start" style="background-color: darkblue; font-size: 2.5vh; height: 28px;">{{ __('PET') }}</x-label>
+            <x-label style="font-size: 2vh; padding-top: 10px; color: darkblue"><span id="pet-data-span"></span> °C</x-label>
+            <x-label class="mt-3 px-2 py-2 text-white text-4xl font-bold rounded-lg flex items-center justify-start" style="background-color: darkblue; font-size: 2.5vh; height: 28px;">{{ __('Temperature') }}</x-label>
+            <x-label style="font-size: 2vh; padding-top: 10px; color: darkblue">{{ $station->measurements[count($station->measurements) - 1]->th_temp}} °C</x-label>
+            <x-label class="mt-3 px-2 py-2 text-white text-4xl font-bold rounded-lg flex items-center justify-start" style="background-color: darkblue; font-size: 2.5vh; height: 28px;">{{ __('Humidity') }}</x-label>
             <x-label style="font-size: 2vh; padding-top: 10px; color: darkblue">{{ $station->measurements[count($station->measurements) - 1]->th_hum}}%</x-label>
-            <x-label style="font-size: 3vh; padding-top: 20px; color: black">{{ __('Wind direction') }}:</x-label>
+            <x-label class="mt-3 px-2 py-2 text-white text-4xl font-bold rounded-lg flex items-center justify-start" style="background-color: darkblue; font-size: 2.5vh; height: 28px;">{{ __('Wind direction') }}:</x-label>
             <img style="transform: rotate({{ $station->measurements[count($station->measurements) - 1]->wind_dir}}deg)" src="/img/arrow.png" style>
         </x-slot>
 
