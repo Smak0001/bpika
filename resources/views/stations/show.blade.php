@@ -8,7 +8,7 @@
             {{-- Divider --}}
             <div class="border-t border-gray-100 w-full mb-3"></div>
             <x-label style="font-size: 3vh; padding-top: 10px; color: deepskyblue">{{ __('PET') }}</x-label>
-            <x-label style="font-size: 2vh; padding-top: 10px; color: deepskyblue">25 °C</x-label>
+            <x-label style="font-size: 2vh; padding-top: 10px; color: deepskyblue"><span id="pet-data-span"></span> °C</x-label>
             <x-label style="font-size: 3vh; padding-top: 20px; color: blue">{{ __('Temperature') }}</x-label>
             <x-label style="font-size: 2vh; padding-top: 10px; color: blue">{{ $station->measurements[count($station->measurements) - 1]->th_temp}} °C</x-label>
             <x-label style="font-size: 3vh; padding-top: 20px; color: darkblue">{{ __('Humidity') }}</x-label>
@@ -117,7 +117,15 @@
 
             const humidityChart = new Chart(ctxHumidityChart, configHumidityChart);
 
+            let petTemp = 0;
+            const petDataSpan = document.getElementById('pet-data-span');
+
             loadData = function(data) {
+                if (data.column == 'pet') {
+                    petTemp = data.data[data.data.length - 1].y;
+                    petTemp = (Math.round(petTemp * 10)) / 10;
+                    petDataSpan.innerText = petTemp;
+                }
                 myChart.data.datasets.push({
                     label: data.column,
                     borderColor: data.column == 'pet' ? '#2ea8db' : '#064e6c',
