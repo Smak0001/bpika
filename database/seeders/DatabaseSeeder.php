@@ -15,10 +15,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        /*$this->call(UsersTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
         $this->call(StationSeeder::class);
         $this->call(MeasurementSeeder::class);
-        $this->call(DataFromLastSevenDaysSeeder::class);*/
+        $this->call(DataFromLastSevenDaysSeeder::class);
 
         if(VisualCrossingDataFromLastSevenDays::all()->isEmpty()){
             Schema::dropIfExists('visual_crossing_data_from_last_seven_days');
