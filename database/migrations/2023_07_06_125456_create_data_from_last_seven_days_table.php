@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('station');
             $table->string('dateTime')->nullable();
-            $table->float('PET')->nullable();
+            $table->float('PET', 17, 14)->nullable();
             $table->timestamps();
 
             $table->foreign('station')->references('code')->on('stations');
