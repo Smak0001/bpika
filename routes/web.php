@@ -17,11 +17,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/home', function () {
     return redirect('https://www.projectenportfolio.nl/wiki/index.php/PR_00315');
 })->name('home');
 
-Route::get('/dashboard', Dashboard::class)->name('dashboard');
+Route::get('/', Dashboard::class)->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::resource('stations', StationController::class);
