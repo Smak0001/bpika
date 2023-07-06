@@ -164,12 +164,14 @@
         const myChart = new Chart(ctx, config);
 
         loadData = function(data) {
-            myChart.data.datasets.push({
-                label: data.label, //station.label,
-                borderColor: data.chart_color, //station.chart_color,
-                data: data.data
-            });
-            myChart.update();
+            if (data.data.length > 0) {
+                myChart.data.datasets.push({
+                    label: data.label, //station.label,
+                    borderColor: data.chart_color, //station.chart_color,
+                    data: data.data
+                });
+                myChart.update();
+            }
         }
         stations.forEach(function(station) {
             try {
