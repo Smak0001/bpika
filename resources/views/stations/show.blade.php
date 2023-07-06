@@ -10,9 +10,9 @@
             <x-label style="font-size: 3vh; padding-top: 10px; color: deepskyblue">{{ __('PET') }}</x-label>
             <x-label style="font-size: 2vh; padding-top: 10px; color: deepskyblue">25 °C</x-label>
             <x-label style="font-size: 3vh; padding-top: 20px; color: blue">{{ __('Temperature') }}</x-label>
-            <x-label style="font-size: 2vh; padding-top: 10px; color: blue">{{ $station->measurements[0]->th_temp}} °C</x-label>
+            <x-label style="font-size: 2vh; padding-top: 10px; color: blue">{{ $station->measurements[count($station->measurements) - 1]->th_temp}} °C</x-label>
             <x-label style="font-size: 3vh; padding-top: 20px; color: darkblue">{{ __('Humidity') }}</x-label>
-            <x-label style="font-size: 2vh; padding-top: 10px; color: darkblue">{{ $station->measurements[0]->th_hum}}%</x-label>
+            <x-label style="font-size: 2vh; padding-top: 10px; color: darkblue">{{ $station->measurements[count($station->measurements) - 1]->th_hum}}%</x-label>
             <x-label style="font-size: 3vh; padding-top: 20px; color: black">{{ __('Wind direction') }}:</x-label>
             <img style="transform: rotate({{ $station->measurements[count($station->measurements) - 1]->wind_dir}}deg)" src="/img/arrow.png" style>
         </x-slot>
