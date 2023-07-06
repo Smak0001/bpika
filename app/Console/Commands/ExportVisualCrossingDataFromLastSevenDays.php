@@ -42,7 +42,7 @@ class ExportVisualCrossingDataFromLastSevenDays extends Command
             File::delete($databaseAt . '/' . $filename);
         }
         $path = $databaseAt . $filename;
-        $command = str_replace('|', '"', "C:/xampp/mysql/bin/mysqldump -u " . env('DB_USERNAME') . " -p " . env('DB_PASSWORD') . " -h " . env('DB_HOST') . " " . env('DB_DATABASE') . " visual_crossing_data_from_last_seven_days > " . "|${path}|");
+        $command = str_replace('|', '"', "C:/xampp/mysql/bin/mysqldump -u " . env('DB_USERNAME') . " -h " . env('DB_HOST') . " " . env('DB_DATABASE') . " visual_crossing_data_from_last_seven_days > " . "|${path}|");
         $returnVar = NULL;
         $output = NULL;
         exec($command, $output, $returnVar);

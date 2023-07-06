@@ -12,10 +12,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('db:seed --class=MeasurementSeeder')->hourlyAt(1);
-        $schedule->command('db:seed --class=DataFromLastSevenDaysSeeder')->hourlyAt(1);
+        $schedule->command('db:seed --class=MeasurementSeeder')->hourlyAt(3);
+        $schedule->command('db:seed --class=DataFromLastSevenDaysSeeder')->hourlyAt(3);
         $schedule->command('db:seed --class=VisualCrossingDataFromLastSevenDaysSeeder')->dailyAt('01:00');
-
+        $schedule->command('database:exportVisualCrossingDataFromLastSevenDays')->dailyAt('01:03');
         // $schedule->command('inspire')->hourly();
     }
 
