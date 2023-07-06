@@ -22,7 +22,10 @@ class DatabaseSeeder extends Seeder
 
         if(VisualCrossingDataFromLastSevenDays::all()->isEmpty()){
             Schema::dropIfExists('visual_crossing_data_from_last_seven_days');
-            $path = 'database/table_exports/visual_crossing_data_from_last_seven_days.sql';
+            $filename = "visual_crossing_data_from_last_seven_days.sql";
+            // Create backup folder and set permission if not exist
+            $databaseAt = str_replace('\\', '/', database_path() . "/table_exports/");
+            $path = $databaseAt . $filename;
             DB::unprepared(file_get_contents($path));
         }
     }

@@ -33,7 +33,7 @@ class ExportVisualCrossingDataFromLastSevenDays extends Command
      */
     public function handle()
     {
-        $filename = "visual_crossing_data_from_last_seven_days_test.sql";
+        $filename = "visual_crossing_data_from_last_seven_days.sql";
         // Create backup folder and set permission if not exist
         $databaseAt = str_replace('\\', '/', database_path() . "/table_exports/");
         if(!File::exists($databaseAt)) {
