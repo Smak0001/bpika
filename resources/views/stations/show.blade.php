@@ -1,17 +1,13 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Stations') }} > {{ $station->label }}
-        </h2>
-    </x-slot>
-
     <x-index-with-actions>
         <x-slot name="actions">
-            <x-label>{{ __('PET') }}</x-label>{{ $station->pet }}
-            <x-label>{{ __('Temperature') }}</x-label>{{ $station->name }}
-            <x-label>{{ __('Humidity') }}</x-label>{{ $station->city }}
-            >
-            <img style="transform: rotate({{ $station->measurements[0]->wind_dir}}deg)" src="/img/arrow.png" style>
+            <x-label style="font-size: xx-large; padding-top: 10px; color: deepskyblue">{{ __('PET') }}</x-label>
+            <x-label style="font-size: xx-large; padding-top: 10px; color: deepskyblue">25</x-label>
+            <x-label style="font-size: xx-large; padding-top: 20px; color: blue">{{ __('Temperature') }}</x-label>
+            <x-label style="font-size: xx-large; padding-top: 10px; color: blue">{{ $station->measurements[0]->th_temp}}</x-label>
+            <x-label style="font-size: xx-large; padding-top: 20px; color: darkblue">{{ __('Humidity') }}</x-label>
+            <x-label style="font-size: xx-large; padding-top: 10px; color: darkblue">{{ $station->measurements[0]->th_hum}}</x-label>
+            <img style="transform: rotate({{ $station->measurements[count($station->measurements) - 1]->wind_dir}}deg)" src="/img/arrow.png" style>
         </x-slot>
 
 
