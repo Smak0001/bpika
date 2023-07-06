@@ -100,7 +100,7 @@
                                     return tooltipItem[0].dataset.label;
                                 },
                                 label: function(tooltipItem) {
-                                    return tooltipItem.label + " : " + Math.round(tooltipItem.formattedValue * 10) / 10;
+                                    return tooltipItem.label + " : " + Math.round(tooltipItem.formattedValue * 10) / 10 + "%";
                                 }
                             }
                         }
