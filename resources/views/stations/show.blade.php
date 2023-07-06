@@ -39,13 +39,13 @@
         </x-slot>
 
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-3">
-            <div class="p-6 text-gray-900">
+            <div class="p-6 text-gray-900" style="width: 75%; height: 75%">
                 <canvas class="mb-3" id="PET_chart"></canvas>
             </div>
         </div>
 
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="p-6 text-gray-900">
+            <div class="p-6 text-gray-900" style="width: 75%; height: 75%">
                 <canvas class="mb-3" id="New_chart"></canvas>
             </div>
         </div>
@@ -61,11 +61,13 @@
             const chartId = 'PET_chart';
             const station = '{{ $station->code }}';
             const ctx = document.getElementById('PET_chart');
-            const ctxNewChart = document.getElementById('New_chart');
+            const ctxHumidityChart = document.getElementById('New_chart');
 
             const config = {
                 type: 'line',
                 data: {},
+                responsive: true,
+                maintainAspectRatio: false,
                 options: {
                     scales: {
                         x: {
@@ -97,7 +99,7 @@
                 }
             };
 
-            const configNewChart = {
+            const configHumidityChart = {
                 type: 'line',
                 data: {},
                 options: {
@@ -133,7 +135,7 @@
 
             const myChart = new Chart(ctx, config);
 
-            const newChart = new Chart(ctxNewChart, configNewChart);
+            const humidityChart = new Chart(ctxHumidityChart, configHumidityChart);
 
             loadData = function(data) {
                 myChart.data.datasets.push({
@@ -145,12 +147,12 @@
             }
 
             loadDataNewChart = function(data) {
-                newChart.data.datasets.push({
+                humidityChart.data.datasets.push({
                     label: data.column,
                     borderColor: data.column == 'pet' ? '#2ea8db' : '#064e6c',
                     data: data.data
                 });
-                newChart.update();
+                humidityChart.update();
             }
 
             addEventListener('load', function() {
