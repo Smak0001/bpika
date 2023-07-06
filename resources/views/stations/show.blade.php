@@ -7,36 +7,13 @@
 
     <x-index-with-actions>
         <x-slot name="actions">
-            <x-label>{{ __('Code') }}</x-label>{{ $station->code }}
-            <x-label>{{ __('Name') }}</x-label>{{ $station->name }}
-            <x-label>{{ __('City') }}</x-label>{{ $station->city }}
-            <x-label>{{ __('Timezone') }}</x-label>{{ $station->timezone }}
-            {{-- Divider --}}
-            <div class="border-t border-gray-100 w-full"></div>
-            <x-primary-button class="my-4"
-                onclick="location.href='{{ route('stations.edit', $station) }}';">
-                {{ __('Edit this station') }}
-            </x-primary-button>
-            <br class="pb-4"/>
-            @if($station->enabled)
-            <form method="POST" action="{{ route('stations.destroy', $station) }}">
-                @csrf
-                @method('DELETE')
-                <x-danger-button type="submit">
-                    {{ __('Disable in dashboard') }}
-                </x-danger-button>
-            </form>
-            @else
-                <form method="POST" action="{{ route('stations.enable', $station) }}">
-                    @csrf
-                    @method('PUT')
-                    <input type="hidden" name="enabled" value="1">
-                    <x-secondary-button type="submit">
-                        {{ __('Enable in dashboard') }}
-                    </x-secondary-button>
-                </form>
-            @endif
+            <x-label>{{ __('PET') }}</x-label>{{ $station->pet }}
+            <x-label>{{ __('Temperature') }}</x-label>{{ $station->name }}
+            <x-label>{{ __('Humidity') }}</x-label>{{ $station->city }}
+            >
+            <img style="transform: rotate({{ $station->measurements[0]->wind_dir}}deg)" src="/img/arrow.png" style>
         </x-slot>
+
 
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-3">
             <div class="p-6 text-gray-900">
