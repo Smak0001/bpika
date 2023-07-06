@@ -88,7 +88,7 @@
                         </section>
                     </div>
                 </div>
-            </div>
+               </div>
         </div>
     </div>
 
@@ -117,7 +117,10 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@^3"></script>
     <script src="https://cdn.jsdelivr.net/npm/luxon@^2"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@^1"></script>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
     <script>
+
 
         const chartId = 'PET_chart';
         const stations = @json($stations);
@@ -168,7 +171,6 @@
             });
             myChart.update();
         }
-
         stations.forEach(function(station) {
             try {
                 let today = new Date();
@@ -189,6 +191,7 @@
         // In order to make this work, the variables below need to be declared in the
         // blade file
         // window.onload = loadData(chartId, stations, options);
+
     </script>
 @endpush
 </x-app-layout>
