@@ -34,12 +34,15 @@ class ExportVisualCrossingDataFromLastSevenDays extends Command
     public function handle()
     {
         $filename = "visual_crossing_data_from_last_seven_days_test.sql";
-        // Create backup folder and set permission if not exist.
-        $storageAt = storage_path() . "/database/table_exports/";
-        if(!File::exists($storageAt)) {
-            File::makeDirectory($storageAt, 0755, true, true);
+        // Create backup folder and set permission if not exist
+        $databaseAt = str_replace('\\', '/', database_path() . "/table_exports/");
+        if(!File::exists($databaseAt)) {
+            File::makeDirectory($databaseAt, 0755, true, true);
+        } else if (File::exists($databaseAt . $filename)) {
+            File::delete($databaseAt . '/' . $filename);
         }
-        $command = "C:/xampp/mysql/bin/mysqldump -u " . env('DB_USERNAME') . " -p " . env('DB_PASSWORD') . " -h " . env('DB_HOST') . " " . env('DB_DATABASE') . " visual_crossing_data_from_last_seven_days > " . '{{$storageAt}}' . $filename;
+        $path = $databaseAt . $filename;
+        $command = str_replace('|', '"', "C:/xampp/mysql/bin/mysqldump -u " . env('DB_USERNAME') . " -p " . env('DB_PASSWORD') . " -h " . env('DB_HOST') . " " . env('DB_DATABASE') . " visual_crossing_data_from_last_seven_days > " . "|${path}|");
         $returnVar = NULL;
         $output = NULL;
         exec($command, $output, $returnVar);
