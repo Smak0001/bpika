@@ -1,12 +1,18 @@
 <x-app-layout>
     <x-index-with-actions>
         <x-slot name="actions">
-            <x-label style="font-size: xx-large; padding-top: 10px; color: deepskyblue">{{ __('PET') }}</x-label>
-            <x-label style="font-size: xx-large; padding-top: 10px; color: deepskyblue">25</x-label>
+            <x-label>{{ __('Code') }}</x-label>{{ $station->code }}
+            <x-label>{{ __('Name') }}</x-label>{{ $station->name }}
+            <x-label>{{ __('City') }}</x-label>{{ $station->city }}
+            <x-label>{{ __('Timezone') }}</x-label>{{ $station->timezone }}
+            {{-- Divider --}}
+            <div class="border-t border-gray-100 w-full"></div>
+            <x-label class="mt-3" style="font-size: xx-large; padding-top: 10px; color: deepskyblue">{{ __('PET') }}</x-label>
+            <x-label style="font-size: xx-large; padding-top: 10px; color: deepskyblue">25 °C</x-label>
             <x-label style="font-size: xx-large; padding-top: 20px; color: blue">{{ __('Temperature') }}</x-label>
-            <x-label style="font-size: xx-large; padding-top: 10px; color: blue">{{ $station->measurements[0]->th_temp}}</x-label>
+            <x-label style="font-size: xx-large; padding-top: 10px; color: blue">{{ $station->measurements[0]->th_temp}} °C</x-label>
             <x-label style="font-size: xx-large; padding-top: 20px; color: darkblue">{{ __('Humidity') }}</x-label>
-            <x-label style="font-size: xx-large; padding-top: 10px; color: darkblue">{{ $station->measurements[0]->th_hum}}</x-label>
+            <x-label style="font-size: xx-large; padding-top: 10px; color: darkblue">{{ $station->measurements[0]->th_hum}}%</x-label>
             <img style="transform: rotate({{ $station->measurements[count($station->measurements) - 1]->wind_dir}}deg)" src="/img/arrow.png" style>
         </x-slot>
 
