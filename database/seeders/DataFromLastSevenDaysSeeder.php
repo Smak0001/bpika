@@ -40,7 +40,6 @@ class DataFromLastSevenDaysSeeder extends Seeder
             } catch (Throwable $e) {
                 report($e);
             }
-
         }
     }
 }
