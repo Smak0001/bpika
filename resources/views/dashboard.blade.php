@@ -125,6 +125,7 @@
         const chartId = 'PET_chart';
         const stations = @json($stations);
         const dataFromLastSevenDays = @json($dataFromLastSevenDays);
+        const visualCrossingDataFromLastSevenDays = @json($visualCrossingDataFromLastSevenDays);
 
         const ctx = document.getElementById('PET_chart');
 
@@ -174,8 +175,14 @@
                 myChart.update();
             }
         }
+
+        let latestDateFromData = 0;
+
         stations.forEach(function(station) {
             const relevantData = dataFromLastSevenDays.filter(data => data.station === station.code)
+            if(relevantData[relevantData.length - 1] !== undefined && relevantData[relevantData.length - 1] !== null) {
+                latestDateFromData = relevantData[relevantData.length - 1].dateTime;
+            }
             dataForFunction = {
                 'label': station.city + ':' + station.name,
                 'chart_color': station.chart_color,
@@ -205,6 +212,69 @@
                 console.error(`Download error: ${error.message}`);
             }*/
         });
+
+        let locations = [];
+        stations.forEach((station) => {
+            if(!locations.includes(station.city)) {
+                locations.push(station.city);
+            }
+        });
+
+        let today = new Date();
+        let sevenDaysAgo = new Date();
+        sevenDaysAgo.setDate(today.getDate() - 7);
+        let timeString = sevenDaysAgo.toISOString();
+
+        if(
+            latestDateFromData.substring(0,1) === "1" ||
+            latestDateFromData.substring(0,1) === "2" ||
+            latestDateFromData.substring(0,1) === "3" ||
+            latestDateFromData.substring(0,1) === "4" ||
+            latestDateFromData.substring(0,1) === "5" ||
+            latestDateFromData.substring(0,1) === "6" ||
+            latestDateFromData.substring(0,1) === "7" ||
+            latestDateFromData.substring(0,1) === "8" ||
+            latestDateFromData.substring(0,1) === "9"
+        ) {
+            latestDateFromData = '0' + latestDateFromData;
+        }
+        let latestDateFromDataCorrectFormat = latestDateFromData.substring(6, 10) + '/' + latestDateFromData.substring(3, 5) + '/' + latestDateFromData.substring(0, 2) + 'T' + latestDateFromData.substring(11, 19) + 'Z';
+        let latestDateFromDataActualDate = new Date(latestDateFromDataCorrectFormat.substring(0, 4), latestDateFromDataCorrectFormat.substring(5, 7), latestDateFromDataCorrectFormat.substring(8, 10), latestDateFromDataCorrectFormat.substring(11, 13), latestDateFromDataCorrectFormat.substring(14, 16), latestDateFromDataCorrectFormat.substring(17, 19));
+
+        locations.forEach((location) => {
+            const relevantData = visualCrossingDataFromLastSevenDays.filter(function(data) {
+                let storedDateTime = data.datetime;
+                let storedDateTimeActualDate = new Date(storedDateTime.substring(0, 4), storedDateTime.substring(5, 7), storedDateTime.substring(8, 10), storedDateTime.substring(11, 13), storedDateTime.substring(14, 16), storedDateTime.substring(17, 19));
+
+
+                return data.location === location && storedDateTimeActualDate.getTime() > sevenDaysAgo.getTime() + 2592000000 && storedDateTimeActualDate.getTime() < today.getTime() + 2592000000; // seems like new Date().getTime() somehow lags behind exactly 30 days???
+            });
+
+            dataForFunction = {
+                'label': location + ': Visual Crossing',
+                'chart_color': `${getRandomColor()}`,
+                'data': [],
+            };
+            relevantData.forEach(function(row) {
+                const dateTimeCorrectFormat = row.datetime.substring(5, 7) + '/' + row.datetime.substring(8, 10) + '/' + row.datetime.substring(0, 4) + ' ' + row.datetime.substring(11, 19);
+                dataForFunction.data.push(
+                    {
+                        'x': dateTimeCorrectFormat,
+                        'y': row.temperatureFeelsLike,
+                    }
+                )
+            });
+            loadData(dataForFunction);
+        })
+
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
 
         // In order to make this work, the variables below need to be declared in the
         // blade file
