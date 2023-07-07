@@ -24,7 +24,7 @@ class DataFromLastSevenDaysSeeder extends Seeder
 
         DataFromLastSevenDays::truncate();
         foreach($stations as $station) {
-            $url = 'http://127.0.0.10' . '/api/stations/' . $station->code . '/measurements?startDate=' . $trimmedTimeString . '&grouping=hourly&column=pet';
+            $url = 'http://www.bpika.hz.nl/api/stations/' . $station->code . '/measurements?startDate=' . $trimmedTimeString . '&grouping=hourly&column=pet';
             $client = new Client();
 
             try {
