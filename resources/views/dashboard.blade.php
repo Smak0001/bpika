@@ -247,7 +247,7 @@
                 let storedDateTimeActualDate = new Date(storedDateTime.substring(0, 4), storedDateTime.substring(5, 7), storedDateTime.substring(8, 10), storedDateTime.substring(11, 13), storedDateTime.substring(14, 16), storedDateTime.substring(17, 19));
 
 
-                return data.location === location && storedDateTimeActualDate.getTime() > sevenDaysAgo.getTime() + 2592000000 && storedDateTimeActualDate.getTime() < today.getTime() + 2592000000; // seems like new Date().getTime() somehow lags behind exactly 30 days???
+                return data.location === location && storedDateTimeActualDate.getTime() > sevenDaysAgo.getTime() + 2592000000 && storedDateTimeActualDate.getTime() < today.getTime() + 2678400000; // seems like new Date().getTime() somehow lags behind 31 days???
             });
 
             dataForFunction = {
