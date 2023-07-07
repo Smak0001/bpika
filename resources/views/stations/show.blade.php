@@ -149,12 +149,12 @@
                     let sevenDaysAgo = new Date();
                     sevenDaysAgo.setDate(today.getDate() - 7);
                     let timeString = sevenDaysAgo.toISOString();
-                    let url = `https://bpika.hz.nl/api/stations/${station}/measurements?startDate=${timeString}&grouping=hourly&column=th_temp`;
+                    let url = window.location.origin + `/api/stations/${station}/measurements?startDate=${timeString}&grouping=hourly&column=th_temp`;
 
                     fetch(url)
                         .then(response => response.text())
                         .then(text => loadData(JSON.parse(text)));
-                    url = `https://bpika.hz.nl/api/stations/${station}/measurements?startDate=${timeString}&grouping=hourly&column=pet`;
+                    url = window.location.origin + `/api/stations/${station}/measurements?startDate=${timeString}&grouping=hourly&column=pet`;
 
                     fetch(url)
                         .then(response => response.text())
@@ -168,7 +168,7 @@
                     let sevenDaysAgo = new Date();
                     sevenDaysAgo.setDate(today.getDate() - 7);
                     let timeString = sevenDaysAgo.toISOString();
-                    let url = `https://bpika.hz.nl/api/stations/${station}/measurements?startDate=${timeString}&grouping=hourly&column=th_hum`;
+                    let url = window.location.origin + `/api/stations/${station}/measurements?startDate=${timeString}&grouping=hourly&column=th_hum`;
 
                     fetch(url)
                         .then(response => response.text())
