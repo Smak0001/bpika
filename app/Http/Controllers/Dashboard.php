@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DataFromLastSevenDays;
 use App\Models\Station;
+use App\Models\VisualCrossingDataFromLastSevenDays;
 use Illuminate\Http\Request;
 
 class Dashboard extends Controller
@@ -13,7 +15,9 @@ class Dashboard extends Controller
     public function __invoke(Request $request)
     {
         return view('dashboard', [
-            'stations' => Station::active()->get()
+            'stations' => Station::active()->get(),
+            'dataFromLastSevenDays' => DataFromLastSevenDays::all(),
+            'visualCrossingDataFromLastSevenDays' => VisualCrossingDataFromLastSevenDays::all(),
         ]);
     }
 }

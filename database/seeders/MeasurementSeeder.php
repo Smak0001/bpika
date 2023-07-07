@@ -28,6 +28,7 @@ class MeasurementSeeder extends Seeder
     public function run(): void
     {
         try {
+            Measurement::truncate();
             DB::beginTransaction();
             $this->readCsvData(function ($data) {
                 unset($data['id']);
