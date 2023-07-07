@@ -124,6 +124,7 @@
 
         const chartId = 'PET_chart';
         const stations = @json($stations);
+        const dataFromLastSevenDays = @json($dataFromLastSevenDays);
 
         const ctx = document.getElementById('PET_chart');
 
@@ -174,7 +175,23 @@
             }
         }
         stations.forEach(function(station) {
-            try {
+            const relevantData = dataFromLastSevenDays.filter(data => data.station === station.code)
+            dataForFunction = {
+                'label': station.city + ':' + station.name,
+                'chart_color': station.chart_color,
+                'data': [],
+            };
+            relevantData.forEach(function(row) {
+                dataForFunction.data.push(
+                    {
+                        'x': row.dateTime,
+                        'y': row.PET,
+                    }
+                )
+            });
+            loadData(dataForFunction);
+
+            /*try {
                 let today = new Date();
                 let sevenDaysAgo = new Date();
                 sevenDaysAgo.setDate(today.getDate() - 7);
@@ -186,8 +203,7 @@
                     .then(text => loadData(JSON.parse(text)));
             } catch (error) {
                 console.error(`Download error: ${error.message}`);
-            }
-
+            }*/
         });
 
         // In order to make this work, the variables below need to be declared in the
