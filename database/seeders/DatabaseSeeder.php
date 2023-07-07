@@ -18,7 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersTableSeeder::class);
         $this->call(MeasurementSeeder::class);
         $this->call(StationSeeder::class);
-        $this->call(MeasurementSeeder::class);
         $this->call(DataFromLastSevenDaysSeeder::class);
 
         if(VisualCrossingDataFromLastSevenDays::all()->isEmpty()){
